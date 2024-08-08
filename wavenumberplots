@@ -1,0 +1,29 @@
+
+N = 500;
+
+phi = linspace(-2,2,N);
+% rhom = [0.2, 0.3, 0.5, 0.7];
+V_0 = 8;
+N_max = 100;
+L =0;
+
+for i=1:length(rhom)
+wavenumbers = zeros(length(rhom),length(phi),2);
+  for l = 1:length(phi)
+    current_L = L+phi(l);
+    [qb_Ln,kb_Ln] = kbound(current_L,V_0,rho,N_max)
+    wavenumbers(i,l,1) = kb_Ln(1);
+    wavenumbers(i,l,2) = kb_Ln(2);
+  end
+
+end
+
+hold on
+for i=1:length(rhom)
+    plot(phi,wavenumbers(i,:,1))
+end
+
+
+% file_path = '~/Documents/AAU/8.semester/P8/Results/resultsABring/absalpharho0.2phi00.160.320.48N1000.csv';
+% writematrix(polvalabs, file_path);
+
